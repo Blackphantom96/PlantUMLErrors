@@ -14,12 +14,14 @@ aggregation(a,b). %Car <>-- Passengers
 composition(a,b). %Car <o>-- Engine
 inheritance(a,b). %User <|-- Admin // User <|-- Monitor
 implements(a,b). %A implements B
-
 % Rules:
 
 % Bucle
 multiplicityError(X):- class(X),multiplicity(X,X,"1");multiplicity(X,X,"1..*").
 
-extendError(A,B,C):- class(A),class(B),class(C),abstract(C),inheritance(A,C),inheritance(B,C),inheritance(A,B).
 
-extendError2(A,B) :- class(A),class(B),inheritance(A,B),multiplicity(A,B,_).
+
+transitiveInheritance(A,B):- class(A),class(B),inheritance(A,B).
+transitiveInheritance(A,B) :- class(A),class(B), inheritance(A,C), inheritance(C,B).
+inheritanceError(A,B):- class(A),class(B),transitiveInheritance(A,B),transitiveInheritance(B,A).
+
