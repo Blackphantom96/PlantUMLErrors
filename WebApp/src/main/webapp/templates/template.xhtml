@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <h:outputStylesheet library="css" name="template.css" />
+</h:head>
+
+<h:body>
+
+    <div class="container">
+        <div class="navbar">
+            <h:graphicImage styleClass="logo centerVerticalItem" url="../resources/images/icon.svg"/>
+            <div class="pageName centerVerticalItem">
+                <ui:insert name="pageName">
+                    <h1>Page Name</h1>
+                </ui:insert>
+            </div>
+
+            <div class="userMenu">
+                <h:graphicImage styleClass="userImage centerVerticalItem" url="https://image.spreadshirtmedia.com/image-server/v1/compositions/1006364074/views/4,width=650,height=650,appearanceId=2,version=1433682090.jpg"/>
+                <div class="dropdown-content">
+                    <a href="#">Perfil</a>
+                    <a href="#">Cerrar sesion</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="containerContent">
+            <div class="leftMenu">
+                <ui:insert name="leftMenu">
+                    <h1>left menu</h1>
+                </ui:insert>
+            </div>
+            <div class="content">
+                <ui:insert name="content">
+                    <h1>content</h1>
+                </ui:insert>
+            </div>
+        </div>
+        <div class="footer">
+            <h1>footer</h1>
+        </div>
+    </div>
+</h:body>
+</html>

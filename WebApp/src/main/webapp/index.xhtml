@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html           xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Silabinfo</title>
+</h:head>
+
+<h:body>
+    <center>
+        <h:form id="form">
+            <p:poll interval="1" update="myImage" />
+            <h:panelGrid columns="2">
+                <h:inputTextarea style="height: 300px" value="#{Front.text}" />
+                <h:graphicImage id="myImage" style="height: 200px" url="resources/images/diagram.png" />
+            </h:panelGrid>
+            <p:commandButton value="Submit" actionListener="#{Front.Action}" update="form"/>
+        </h:form>
+    </center>
+</h:body>
+</html>
+
