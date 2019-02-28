@@ -9,11 +9,11 @@ package "Entities" #DDD{
   Editable <|-- Monitor
   Editable <|-- Professor
   User "user" -- "comments" Comment
-  Comment "partner"--"child" Comment
-  Comment "comments"--"partner" Version
-  Article "articles"--"author" Professor
-  Article --"actual" Version
-  Article --"versions" Version
+  Comment "partner" -- "child" Comment
+  Comment "comments" -- "partner" Version
+  Article "articles" -- "author" Professor
+  Article -- "actual" Version
+  Article -- "versions" Version
   Editable -- Version
 
 }
