@@ -37,6 +37,7 @@ def main():
 
     f = open(FILENAME) if FILENAME != "-" else stdin
 
+    Parser.set_debug()
     parsed_data = Parser.parse(f)
 
     print(parsed_data)
