@@ -5,7 +5,7 @@ class(c). %Define a class
 interface(c). %Define a interface
 abstract(c). %Define Abstract
 
-method(m,c).
+method(m,c,p,o).
 attribute(a,c).
 
 dependency(a,b). %A use B
@@ -14,14 +14,20 @@ aggregation(a,b). %Car <>-- Passengers
 composition(a,b). %Car <o>-- Engine
 inheritance(a,b). %User <|-- Admin // User <|-- Monitor
 implements(a,b). %A implements B
+
+
+
+
+
+
 % Rules:
 
 % Bucle
-multiplicityError(X):- class(X),multiplicity(X,X,"1");multiplicity(X,X,"1..*").
-
-
+multiplicityError(X):- class(X),(multiplicity(X,X,"1");multiplicity(X,X,"1..*");multiplicity(X,X,"")).
 
 transitiveInheritance(A,B):- class(A),class(B),inheritance(A,B).
 transitiveInheritance(A,B) :- class(A),class(B), inheritance(A,C), inheritance(C,B).
 inheritanceError(A,B):- class(A),class(B),transitiveInheritance(A,B),transitiveInheritance(B,A).
 
+warningAlone(A) :- dependency(A,_); aggregation(A,_); composition(A,_); inheritance(A,_); implements(A,_); 
+dependency(_,A); aggregation(_,A); composition(_,A); inheritance(_,A); implements(_,A).

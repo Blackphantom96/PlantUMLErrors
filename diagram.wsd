@@ -1,0 +1,29 @@
+@startuml
+  class Method {
+    -String type
+  }
+  class Attribute {
+    -String type
+  }
+  class Relation {
+    -String multiplicity
+    +getClasses() : Class[]
+  }
+  Dependency --|> Relation
+  Aggregation --|> Relation
+  Composition --|> Relation
+  Inheritance --|> Relation
+  Implements --|> Relation
+  Relation -- "2" Object
+  Object -- "*" Method
+  
+  Interface --|> Object
+
+  Class --|> Object
+  Class -- "*" Attribute
+
+  AbstractClass --|> Object
+  AbstractClass -- "*" Attribute
+  AbstractClass -- "*" AbstractMethod
+
+@enduml
