@@ -28,6 +28,7 @@ public class PlantUMLController {
                 out.write(text);
                 out.flush();
                 out.close();
+                Runtime.getRuntime().exec("/Users/juanmoreno/Dev/SBCO/Prolog/WebApp/src/main/webapp/resources/generateFile.sh");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
