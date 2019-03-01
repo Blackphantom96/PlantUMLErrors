@@ -1,4 +1,4 @@
 @startuml
-classA -- "1" classA
-class classA
+  class example
+  example -- "1" example
 @enduml

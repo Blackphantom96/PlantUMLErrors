@@ -1,3 +1,3 @@
-class(classa).
-dependency(classa, classa).
-multiplicity(classa, classa, "1").
+class(classb).
+dependency(classb, classb).
+multiplicity(classb, classb, 1).

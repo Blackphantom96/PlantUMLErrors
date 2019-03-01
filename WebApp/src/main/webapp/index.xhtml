@@ -11,12 +11,12 @@
 <h:body>
     <center>
         <h:form id="form">
-            <p:poll interval="1" update="myImage"/>
             <h:panelGrid columns="2">
                 <h:inputTextarea style="height: 300px" value="#{Front.text}" />
                 <h:graphicImage id="myImage" style="height: 200px" url="resources/diagram.png" />
             </h:panelGrid>
-            <p:commandButton value="Submit" actionListener="#{Front.Action}" update="form"/>
+            <p:commandButton value="Submit" action="#{Front.Action}" update="form"/>
+            <p:poll interval="1" update="myImage"/>
         </h:form>
     </center>
 </h:body>
