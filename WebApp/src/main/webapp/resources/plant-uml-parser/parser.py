@@ -22,8 +22,8 @@ class Parser:
         # relations
         
         (r'(\w+)(\s+\"(\w+)\")?\s+--\s+(\"(\w+)\")?\s*(\w+)', lambda x: [("dependency", x.group(1), x.group(6))] +
-         ([("multiplicity", x.group(1), x.group(6), x.group(5))] if x.group(5) else []) +
-         ([("multiplicity", x.group(6), x.group(1), x.group(3))] if x.group(3) else [])),
+         ([("multiplicity", x.group(1), x.group(6), "\"" + x.group(5) + "\"")] if x.group(5) else []) +
+         ([("multiplicity", x.group(6), x.group(1), "\"" + x.group(3) + "\"")] if x.group(3) else [])),
 
         (r'(\w+)\s+\*--\s+(\w+)', lambda x: ("composition", x.group(2), x.group(1))),
         (r'(\w+)\s+--\*\s+(\w+)', lambda x: ("composition", x.group(1), x.group(2))),
