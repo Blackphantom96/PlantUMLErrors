@@ -1,0 +1,1 @@
+father(michael,X)
