@@ -1,4 +1,9 @@
 @startuml
-  class example
-  example -- "1" example
+  class class1
+  class class2
+  interface interface1 <<interface>>
+  class1 -- "1" class1
+  class2 --|> class1
+  class1 --|> class2
+  class2 --|> interface1
 @enduml

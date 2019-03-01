@@ -12,9 +12,9 @@ class Parser:
         # types
         (r'class\s+(\w+)', lambda x: ("class", x.group(1))),
         
-        (r'abstract\s+(\w+)\s+([<]{2}(\w+)[>]{2})?', lambda x: ("abstract", x.group(1), x.group(3))),
+        (r'abstract\s+(\w+)\s+([<]{2}(\w+)[>]{2})?', lambda x: ("abstract", x.group(1))),
 
-        (r'interface\s+(\w+)\s+([<]{2}(\w+)[>]{2})?', lambda x: ("interface", x.group(1), x.group(3))),
+        (r'interface\s+(\w+)\s+([<]{2}(\w+)[>]{2})?', lambda x: ("interface", x.group(1))),
 
         (r'(\w+)\s+--\|>\s+(\w+)', lambda x: ("inheritance", x.group(1), x.group(2))),
         (r'(\w+)\s+<\|--\s+(\w+)', lambda x: ("inheritance", x.group(2), x.group(1))),
