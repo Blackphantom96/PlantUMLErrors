@@ -17,7 +17,7 @@ class PrologConverter:
         else:
             name = clause[0]
             attributes = clause[1:]
-            outfile.write("%s(%s).\n" % (name, ", ".join([str(i) for i in attributes])))
+            outfile.write("%s(%s).\n" % (name, ", ".join([str(i).lower() for i in attributes])))
         
     @staticmethod
     def convert(clauses, outfile):

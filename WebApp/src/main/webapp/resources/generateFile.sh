@@ -1,0 +1,1 @@
+python3 ./plant-uml-parser/main.py diagram.wsd | sort > assert.pl

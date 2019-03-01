@@ -21,7 +21,7 @@ public class PlantUMLController {
 
     public void Action() {
         try {
-            File f = new File("/Users/juanmoreno/Dev/SBCO/Prolog/WebApp/src/main/webapp/resources/images/diagram.wsd");
+            File f = new File("/Users/juanmoreno/Dev/SBCO/Prolog/WebApp/src/main/webapp/resources/diagram.wsd");
             try {
                 FileWriter fw = new FileWriter(f);
                 BufferedWriter out = new BufferedWriter(fw);
@@ -31,7 +31,7 @@ public class PlantUMLController {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            String[] temp = {"/Users/juanmoreno/Dev/SBCO/Prolog/WebApp/src/main/webapp/resources/images/diagram.wsd"};
+            String[] temp = {"/Users/juanmoreno/Dev/SBCO/Prolog/WebApp/src/main/webapp/resources/diagram.wsd"};
             Run.main(temp);
         } catch (IOException e) {
             e.printStackTrace();

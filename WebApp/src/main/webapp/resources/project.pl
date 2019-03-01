@@ -13,7 +13,7 @@ multiplicity(a,b,m). %A have [0,1,*,1..*] of B
 aggregation(a,b). %Car <>-- Passengers
 composition(a,b). %Car <o>-- Engine
 inheritance(a,b). %User <|-- Admin // User <|-- Monitor
-implements(a,b). %A implements B
+% implements(a,b). %A implements B
 
 
 
@@ -21,6 +21,7 @@ implements(a,b). %A implements B
 
 
 % Rules:
+implements(A,B):- class(A),interface(B),inheritance(A,B).
 
 % Bucle
 multiplicityError(X):- class(X),(multiplicity(X,X,"1");multiplicity(X,X,"1..*");multiplicity(X,X,"")).
