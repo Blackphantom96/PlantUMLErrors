@@ -4,8 +4,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.request.body.MultipartBody;
 import lombok.Data;
-import org.projog.api.Projog;
-import org.projog.api.QueryStatement;
+
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -19,7 +18,6 @@ import java.io.*;
 @Data
 public class PlantUMLController {
     private String text ;
-    Projog prolog ;
 
     public PlantUMLController(){
 
@@ -30,7 +28,6 @@ public class PlantUMLController {
     }
 
     public void Action() {
-        prolog =new Projog();
         try {
             ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
             try {
@@ -48,8 +45,6 @@ public class PlantUMLController {
                 out.write(x.getBody());
                 out.flush();
                 out.close();
-                prolog.consultFile(new File(servletContext.getRealPath("/resources/project.pl")));
-                QueryStatement sq = prolog.query("multiplicityError(X).");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
