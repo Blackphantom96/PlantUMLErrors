@@ -6,6 +6,7 @@ from sys import stdout
 
 from parser import *
 from prologConverter import *
+from settings import *
 
 
 def command_line_parser():
@@ -39,12 +40,14 @@ def command_line_parser():
 def main():
     options = command_line_parser()
 
+    settings = Settings()
+    settings.setSetting("debug", options['verbose'])
+
     FILENAME     = options['file']
     OUT_FILENAME = options['outfile']
 
     f = open(FILENAME, "r") if FILENAME not in ("-", "") else stdin
 
-    Parser.set_debug(False)
     clauses = Parser.parse(f)
 
     # print("\n".join([str(i) for i in clauses]))

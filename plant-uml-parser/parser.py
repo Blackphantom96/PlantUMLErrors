@@ -1,19 +1,13 @@
 import sys
 import re
+from settings import *
 
 class ParserException(Exception):
     """ParserException"""
 
-
-class Element(object):
-    def __init__(self, name):
-        self.name = name
-
-
 class Parser:
     """TODO"""
 
-    debug = False
     regexps = [
         # types
         (r'abstract\s+(\w+)\s+([<]{2}(\w+)[>]{2})?', lambda x: ("abstract", x.group(1), x.group(3))),
@@ -40,31 +34,18 @@ class Parser:
     ]
 
     @staticmethod
-    def lprint(*args, **kwargs):
-        """
-        makes print for log
-        """
-        if Parser.debug:
-            print("[LOG] ", end="")
-            print(*args, **kwargs)
-
-    @staticmethod
-    def set_debug(val = True):
-        Parser.debug = val
-    
-    @staticmethod
     def parse_line(line):
         """parse line"""
-        Parser.lprint("ENTRA: \"", line, "\"")
+        Utilities().lprint("ENTRA: \"", line, "\"")
 
         results = []
         
         for r in Parser.regexps:
             res = re.match(r[0], line)
-            Parser.lprint(res)
+            Utilities().lprint(res)
             if res is not None:
                 result = r[1](res)
-                Parser.lprint("RES:", result)
+                Utilities().lprint("RES:", result)
                 results.append(result)
 
         return results

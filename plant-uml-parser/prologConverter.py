@@ -1,28 +1,12 @@
 import sys
 import re
+from settings import *
 
 class PrologConverterException(Exception):
     """PrologConverterException"""
 
-
 class PrologConverter:
     """TODO"""
-
-    debug = False
-    
-    @staticmethod
-    def lprint(*args, **kwargs):
-        """
-        makes print for log
-        """
-        if PrologConverter.debug:
-            print("[LOG] ", end="")
-            print(*args, **kwargs)
-
-    @staticmethod
-    def set_debug(val = True):
-        """set debug flag"""
-        PrologConverter.debug = val
 
     @staticmethod
     def write_clause(clause, outfile):
@@ -44,4 +28,4 @@ class PrologConverter:
             for subclause in clause:
                 PrologConverter.write_clause(subclause, outfile)
 
-        PrologConverter.lprint("finished writing clauses.")
+        Utilities().lprint("finished writing clauses.")
