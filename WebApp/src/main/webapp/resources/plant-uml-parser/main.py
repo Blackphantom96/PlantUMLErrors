@@ -37,6 +37,10 @@ def command_line_parser():
     return options
 
 
+def start(inputfile, outputfile):
+    clauses = Parser.parse(inputfile)
+    PrologConverter.convert(clauses, outputfile)
+
 def main():
     options = command_line_parser()
 
@@ -46,14 +50,11 @@ def main():
     FILENAME     = options['file']
     OUT_FILENAME = options['outfile']
 
-    f = open(FILENAME, "r") if FILENAME not in ("-", "") else stdin
-
-    clauses = Parser.parse(f)
-
-    # print("\n".join([str(i) for i in clauses]))
+    inputfile = open(FILENAME, "r") if FILENAME not in ("-", "") else stdin
 
     outfile = open(OUT_FILENAME, "w") if OUT_FILENAME not in ("-", "") else stdout
-    PrologConverter.convert(clauses, outfile)
+
+    start(inputfile, outfile)
 
 if __name__ == "__main__":
     main()
