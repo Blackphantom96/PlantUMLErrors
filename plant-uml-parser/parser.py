@@ -15,13 +15,28 @@ class Parser:
 
     debug = False
     regexps = [
+        # types
         (r'abstract\s+(\w+)\s+([<]{2}(\w+)[>]{2})?', lambda x: ("abstract", x.group(1), x.group(3))),
+
         (r'interface\s+(\w+)\s+([<]{2}(\w+)[>]{2})?', lambda x: ("interface", x.group(1), x.group(3))),
-        (r'(\w+)\s+<\|--\s+(\w+)', lambda x: ("inheritance", x.group(1), x.group(2))),
-        (r'(\w+)\s+--\|>\s+(\w+)', lambda x: ("inheritance", x.group(2), x.group(1))),
+
+        (r'(\w+)\s+--\|>\s+(\w+)', lambda x: ("inheritance", x.group(1), x.group(2))),
+        (r'(\w+)\s+<\|--\s+(\w+)', lambda x: ("inheritance", x.group(2), x.group(1))),
+
+        # relations
+        
         (r'(\w+)(\s+\"(\w+)\")?\s+--\s+(\"(\w+)\")?\s*(\w+)', lambda x: [("dependency", x.group(1), x.group(6))] +
          ([("multiplicity", x.group(1), x.group(6), x.group(5))] if x.group(5) else []) +
          ([("multiplicity", x.group(6), x.group(1), x.group(3))] if x.group(3) else [])),
+
+        (r'(\w+)\s+\*--\s+(\w+)', lambda x: ("composition", x.group(2), x.group(1))),
+        (r'(\w+)\s+--\*\s+(\w+)', lambda x: ("composition", x.group(1), x.group(2))),
+
+        (r'(\w+)\s+--o\s+(\w+)', lambda x: ("aggregation", x.group(1), x.group(2))),
+        (r'(\w+)\s+o--\s+(\w+)', lambda x: ("aggregation", x.group(2), x.group(1))),
+
+        #methods # TODO
+        # (r'(\w+)\s+:\s+(\w+)\((\.*)\)', lambda x: ("method", x.group(1), x.group(2), ),
     ]
 
     @staticmethod
@@ -30,12 +45,12 @@ class Parser:
         makes print for log
         """
         if Parser.debug:
-            print("[LOG {}] ", end="")
+            print("[LOG] ", end="")
             print(*args, **kwargs)
 
     @staticmethod
     def set_debug(val = True):
-        debug = val
+        Parser.debug = val
     
     @staticmethod
     def parse_line(line):
