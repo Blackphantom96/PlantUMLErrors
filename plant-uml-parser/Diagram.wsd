@@ -15,11 +15,8 @@ package "Entities" #DDD{
   Article -- "actual" Version
   Article -- "versions" Version
   Editable -- Version
-  	String data
-	String getData(String x, String y)
-  }
 
-  Object : equals()
+  class Prueba
 
 }
 @enduml
