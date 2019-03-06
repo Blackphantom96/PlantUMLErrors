@@ -1,0 +1,29 @@
+@startuml
+class alone
+class a
+class b
+class c
+class d
+class bin_tree
+class node
+interface user { 
+  getName() : String
+  getMail() : String
+}
+class user_x {
+  getName() : String
+}
+
+d --|> b
+b --|> a
+c --|> a
+a --|> d
+
+bin_tree *-- "*" node 
+node -- "left 0..1" node
+node -- "parent 0..1" node
+node -- "right 1" node
+
+user <|-- user_x 
+
+@enduml

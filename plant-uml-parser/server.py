@@ -6,6 +6,8 @@ import datetime
 from flask import Flask, jsonify, request, redirect
 from settings import *
 from main import *
+from pyswip import Prolog
+
 
 # You can change this to any folder on your system
 app = Flask(__name__)
@@ -50,8 +52,30 @@ def process_file(file_stream):
     infile = io.StringIO(text_obj)
     
     start(infile, outfile)
-
+    f = open("assert.pl","w")
+    f.write(outfile.getvalue())
+    f.close()
+    res = query()
+    
     return outfile.getvalue()
 
+def query():
+  """Make a prolog Query"""
+  res = []
+  prolog = Prolog()
+  try:
+    # prolog.consult("project.pl")
+    pass
+  except expression as identifier:
+    pass
+  # res.append(queryResult(prolog.query('multiplicityError(X)')))
+  # res.append(queryResult(prolog.query('warningAlone(X)')))
+  return res
+
+def queryResult(query):
+  try:
+    return list(query)
+  except expression as identifier:
+    return ""
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5001, debug=True)
