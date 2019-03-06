@@ -1,15 +1,18 @@
 :- include('assert.pl').
 
-% Rules:
-implements(A,B):- class(A),interface(B),inheritance(A,B).
+implements(A,B):- class(A,_),interface(B,_),inheritance(A,B).
 
+warningMultiplicity(X):- class(X,_),association(_,X,X,"1..*",_);association(_,X,X,_,"1..*").
 
-% Bucle
-multiplicityError(X):- class(X),(multiplicity(X,X,"1");multiplicity(X,X,"1..*");multiplicity(X,X,"")).
+transitiveInheritance(A,B):- inheritance(A,B).
+transitiveInheritance(A,B) :- inheritance(A,C), inheritance(C,B).
+cyclicInheritanceError(A,B):- transitiveInheritance(A,B),transitiveInheritance(B,A).
 
-transitiveInheritance(A,B):- class(A),class(B),inheritance(A,B).
-transitiveInheritance(A,B) :- class(A),class(B), inheritance(A,C), inheritance(C,B).
-inheritanceError(A,B):- class(A),class(B),transitiveInheritance(A,B),transitiveInheritance(B,A).
+warningAlone(A) :- not(association(_,A,_,_,_);association(_,_,A,_,_)).
 
-warningAlone(A) :- dependency(A,_); aggregation(A,_); composition(A,_); inheritance(A,_); implements(A,_); 
-dependency(_,A); aggregation(_,A); composition(_,A); inheritance(_,A); implements(_,A). 
+errorNotAllImplement(X) :- class(X,_), inheritance(X,Y) ,(not(operation(N,RT,P,X,V)),operation(N,RT,P,Y,V)).
+
+errorNotImplements(X) :- class(X,_), not(inheritance(X,Y)) ,(not(operation(N,RT,P,X,V)),operation(N,RT,P,Y,V)).
+
+warningDiamondProblem(X) :- inheritance(B,A),inheritance(C,A),inheritance(X,B),inheritance(X,C).
+

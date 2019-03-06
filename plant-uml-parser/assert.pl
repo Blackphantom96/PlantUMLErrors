@@ -6,8 +6,4 @@ inheritance(A,B). % A --|> B
 association(N,A,B,AB,BA). % A "AB"---N--- "BA" B
 aggregation(N). % A "AB"<>---N--- "BA"
 composition(N). % A "AB"<*>---N--- "BA"
-public(A). % Public A +
-private(A). % Private A -
-protected(A). % Protected #
-package(A). % Package A ~
-abstract(A). % Abstract Class or operation
+abstract(A). % Abstract Class
