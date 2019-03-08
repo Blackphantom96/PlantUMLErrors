@@ -62,7 +62,7 @@ def assertz(assertz):
         prolog.assertz(line.strip(" ."))
     
 
-def start(assertzfile, queriesfile, outfile):
+def start_prolog(assertzfile, queriesfile, outfile):
     assert hasattr(assertzfile, "readlines"), "cannot read assertz file, probably not a file"
     assert hasattr(queriesfile, "readlines"), "cannot read queries file, probably not a file"
     assert hasattr(outfile, "write"), "cannot write output file, probably not a file"
@@ -116,7 +116,7 @@ def main():
     queriesfile = open(QUERIES, "r") if QUERIES not in ("-", "") else stdin
     outfile = open(OUTPUT, "w") if OUTPUT not in ("-", "") else stdout
 
-    start(assertzfile, queriesfile, outfile)
+    start_prolog(assertzfile, queriesfile, outfile)
 
 if __name__ == "__main__":
     main()
