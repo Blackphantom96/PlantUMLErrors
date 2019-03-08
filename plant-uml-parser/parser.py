@@ -2,6 +2,13 @@ import sys
 import re
 from settings import *
 
+name_count = 0
+
+def get_next_count():
+    global name_count
+    name_count += 1
+    return name_count-1
+
 class ParserException(Exception):
     """ParserException"""
 
@@ -21,15 +28,43 @@ class Parser:
 
         # relations
         
-        (r'(\w+)(\s+\"(\w+)\")?\s+--\s+(\"(\w+)\")?\s*(\w+)', lambda x: [("dependency", x.group(1), x.group(6))] +
-         ([("multiplicity", x.group(1), x.group(6), "\"" + x.group(5) + "\"")] if x.group(5) else []) +
-         ([("multiplicity", x.group(6), x.group(1), "\"" + x.group(3) + "\"")] if x.group(3) else [])),
+        (r'(\w+)(\s+\"(.+)\")?\s+--(\s+\"(.+)\")?\s+(\w+)(\s+:\s+(\w+))?',
+         lambda x: ("association",
+                    x.group(8) if x.group(8) else str(get_next_count()), # assign id
+                    x.group(1),
+                    x.group(6),
+                    x.group(3),
+                    x.group(5))),
 
-        (r'(\w+)\s+\*--\s+(\w+)', lambda x: ("composition", x.group(2), x.group(1))),
-        (r'(\w+)\s+--\*\s+(\w+)', lambda x: ("composition", x.group(1), x.group(2))),
+        (r'(\w+)(\s+\"(.+)\")?\s+\*--(\s+\"(.+)\")?\s+(\w+)(\s+:\s+(\w+))?',
+         lambda x: [
+             ("association",
+              str(get_next_count()),
+              x.group(2),
+              x.group(1)),
+             ("composition", str(get_next_count()-1))]),
+        (r'(\w+)(\s+\"(.+)\")?\s+--\*(\s+\"(.+)\")?\s+(\w+)(\s+:\s+(\w+))?',
+         lambda x: [
+             ("association",
+              str(get_next_count()),
+              x.group(1),
+              x.group(2)),
+             ("composition", str(get_next_count()-1))]),
 
-        (r'(\w+)\s+--o\s+(\w+)', lambda x: ("aggregation", x.group(1), x.group(2))),
-        (r'(\w+)\s+o--\s+(\w+)', lambda x: ("aggregation", x.group(2), x.group(1))),
+        (r'(\w+)(\s+\"(.+)\")?\s+o--(\s+\"(.+)\")?\s+(\w+)(\s+:\s+(\w+))?', 
+         lambda x: [
+             ("association",
+              str(get_next_count()),
+              x.group(1), 
+              x.group(2)),
+             ("aggregation", str(get_next_count()-1))]),
+        (r'(\w+)(\s+\"(.+)\")?\s+--o(\s+\"(.+)\")?\s+(\w+)(\s+:\s+(\w+))?', 
+         lambda x: [
+             ("association",
+              str(get_next_count()),
+              x.group(2), 
+              x.group(1)),
+             ("aggregation", str(get_next_count()-1))]),
 
         #methods # TODO
         # (r'(\w+)\s+:\s+(\w+)\((\.*)\)', lambda x: ("method", x.group(1), x.group(2), ),
@@ -38,7 +73,7 @@ class Parser:
     @staticmethod
     def parse_line(line):
         """parse line"""
-        Utilities().lprint("ENTRA: \"", line, "\"")
+        Utilities().lprint("ENTRA: \"{}\"".format(line))
 
         results = []
         
