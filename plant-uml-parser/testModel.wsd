@@ -1,0 +1,43 @@
+@startuml
+package "TestModel" #DDD{
+  
+  class A
+  class B
+  class C
+  A <|-- B
+  B <|-- C
+  C <|-- A
+
+  class D
+  D -- "1..*" D
+
+  class FAlone
+
+  interface Interface
+  class Impl
+  Interface <|-- Impl
+  Interface : int method()
+
+  class E
+  class F
+  class G
+  E <|-- F
+  E <|-- G
+  G <|-- F
+
+  class H
+  class I
+  class J
+  class K
+  H <|-- I
+  H <|-- J
+  I <|-- K
+  J <|-- K
+
+  class L
+  L -- "0..1" L
+  L : Unknown attr
+  L : Unknown method0()
+
+}
+@enduml
